@@ -1,0 +1,77 @@
+<div class="row justify-content-center"><div class="col-md-8 col-lg-5"><div
+      class="card shadow-sm border-0"
+    ><div class="card-header bg-white py-3 border-bottom"><div
+          class="d-flex align-items-center"
+        ><a href="/setores" class="btn btn-sm btn-outline-secondary me-3"><i
+              class="fas fa-arrow-left"
+            ></i></a><h4 class="card-title mb-0"><i
+              class="fas fa-edit me-2 text-warning"
+            ></i>Editar Setor</h4></div></div><div class="card-body p-4"><div
+          class="text-center mb-4"
+        ><div
+            class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+            style="width: 70px; height: 70px;"
+          ><i class="fas fa-building text-warning fa-2x"></i></div><h5
+            class="mb-1 fw-bold"
+          >{{setor.nome}}</h5><span class="badge bg-light text-muted border">ID
+            #{{setor.id}}</span></div>
+        <form action="/setores/update/{{setor.id}}" method="POST">
+          <!-- Nome do Setor -->
+          <div class="mb-4">
+            <label
+              for="nome"
+              class="form-label fw-bold text-muted small text-uppercase"
+            >Nome do Setor / Departamento</label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-end-0 text-muted">
+                <i class="fas fa-tag"></i>
+              </span>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                class="form-control border-start-0 bg-light"
+                value="{{setor.nome}}"
+                placeholder="Ex: Recursos Humanos"
+                required
+                autofocus
+              />
+            </div>
+            <div class="form-text mt-2">
+              Altere o nome do setor. Esta mudança refletirá em todos os
+              chamados associados.
+            </div>
+          </div>
+
+          <hr class="my-4" />
+
+          <!-- Botões de Acção -->
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="/setores" class="btn btn-light border px-4">
+              Cancelar
+            </a>
+            <button type="submit" class="btn btn-warning px-5 fw-bold">
+              <i class="fas fa-sync-alt me-2"></i>Atualizar Setor
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Alerta de Impacto -->
+    <div
+      class="mt-4 p-3 bg-warning bg-opacity-10 rounded-3 border border-warning-subtle"
+    >
+      <div class="d-flex align-items-start">
+        <i class="fas fa-exclamation-triangle text-warning me-3 mt-1"></i>
+        <div>
+          <h6 class="fw-bold mb-1">Aviso de Integridade</h6>
+          <p class="small text-muted mb-0">
+            Ao renomear um setor, todos os chamados abertos ou concluídos que
+            pertencem a esta área serão atualizados automaticamente.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

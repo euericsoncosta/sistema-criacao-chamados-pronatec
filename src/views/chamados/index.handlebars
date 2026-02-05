@@ -1,0 +1,174 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="fw-bold mb-0">
+      <i class="fas fa-ticket-alt me-2 text-primary"></i>Centro de Chamados
+    </h2>
+    <p class="text-muted small mb-0">Monitorize e gira todos os pedidos de
+      suporte técnico.</p>
+  </div>
+  <a href="/chamados/novo" class="btn btn-primary px-4 shadow-sm fw-bold">
+    <i class="fas fa-plus-circle me-2"></i>Abrir Novo Chamado
+  </a>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-auto">
+    <div
+      class="bg-white border rounded-pill px-3 py-1 small shadow-sm d-inline-flex align-items-center"
+    >
+      <span
+        class="badge bg-warning text-dark rounded-circle me-2"
+        style="width: 10px; height: 10px; padding: 0;"
+      > </span>
+      Abertos
+    </div>
+  </div>
+  <div class="col-md-auto">
+    <div
+      class="bg-white border rounded-pill px-3 py-1 small shadow-sm d-inline-flex align-items-center"
+    >
+      <span
+        class="badge bg-info rounded-circle me-2"
+        style="width: 10px; height: 10px; padding: 0;"
+      > </span>
+      Em Atendimento
+    </div>
+  </div>
+  <div class="col-md-auto">
+    <div
+      class="bg-white border rounded-pill px-3 py-1 small shadow-sm d-inline-flex align-items-center"
+    >
+      <span
+        class="badge bg-success rounded-circle me-2"
+        style="width: 10px; height: 10px; padding: 0;"
+      > </span>
+      Concluídos
+    </div>
+  </div>
+</div>
+
+<div class="card shadow-sm border-0">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th class="ps-4" style="width: 80px;">ID</th>
+            <th>Assunto / Cliente</th>
+            <th>Setor</th>
+            <th>Estado</th>
+            <th>Prioridade</th>
+            <th class="text-center">Data</th>
+            <th class="text-end pe-4">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each chamados}}
+            <tr>
+              <td class="ps-4">
+                <span class="text-muted small fw-bold">#{{this.id}}</span>
+              </td>
+              <td>
+                <div class="fw-bold text-dark">{{this.titulo}}</div>
+                <div class="text-muted small">
+                  <i class="fas fa-user me-1"></i>
+                  {{this.cliente.nome}}
+                </div>
+              </td>
+              <td>
+                <span class="text-secondary small fw-medium">
+                  <i class="fas fa-building me-1 opacity-50"></i>
+                  {{this.setor.nome}}
+                </span>
+              </td>
+              <td>
+                {{#if (eq this.status "aberto")}}
+                  <span
+                    class="badge bg-warning text-dark border border-warning-subtle"
+                  >Aberto</span>
+                {{else if (eq this.status "em_atendimento")}}
+                  <span class="badge bg-info border border-info-subtle">Em
+                    Atendimento</span>
+                {{else}}
+                  <span
+                    class="badge bg-success border border-success-subtle"
+                  >Concluído</span>
+                {{/if}}
+              </td>
+              <td>
+                {{#if (eq this.prioridade "alta")}}
+                  <span class="text-danger small fw-bold"><i
+                      class="fas fa-circle me-1 small"
+                    ></i>
+                    Alta</span>
+                {{else if (eq this.prioridade "media")}}
+                  <span class="text-primary small fw-bold"><i
+                      class="fas fa-circle me-1 small"
+                    ></i>
+                    Média</span>
+                {{else}}
+                  <span class="text-muted small fw-bold"><i
+                      class="fas fa-circle me-1 small"
+                    ></i>
+                    Baixa</span>
+                {{/if}}
+              </td>
+              <td class="text-center">
+                <div class="small text-muted">{{formatDate
+                    this.created_at
+                  }}</div>
+              </td>
+              <td class="text-end pe-4">
+                <a
+                  href="/chamados/editar/{{this.id}}"
+                  class="btn btn-sm btn-light border shadow-sm"
+                  title="Ver Detalhes"
+                >
+                  <i class="fas fa-external-link-alt text-primary"></i>
+                </a>
+              </td>
+            </tr>
+          {{else}}
+            <tr>
+              <td colspan="7" class="text-center py-5">
+                <div class="py-4">
+                  <i class="fas fa-ticket-alt fa-3x text-light mb-3"></i>
+                  <h5 class="text-muted">Nenhum chamado registado</h5>
+                  <p class="text-muted small">Quando um utilizador abrir um
+                    pedido, ele aparecerá nesta lista.</p>
+                  <a
+                    href="/chamados/novo"
+                    class="btn btn-sm btn-primary mt-2"
+                  >Abrir Primeiro Chamado</a>
+                </div>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card-footer bg-white border-top-0 py-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <p class="text-muted small mb-0">
+        A exibir
+        <strong>{{chamados.length}}</strong>
+        registos no total.
+      </p>
+      <nav>
+        <ul class="pagination pagination-sm mb-0">
+          <li class="page-item disabled"><a
+              class="page-link"
+              href="#"
+            >Anterior</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item disabled"><a
+              class="page-link"
+              href="#"
+            >Próximo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

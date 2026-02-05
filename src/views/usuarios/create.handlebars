@@ -1,0 +1,106 @@
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <!-- Card Principal de Registo -->
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3 border-bottom">
+                <div class="d-flex align-items-center">
+                    <a href="/usuarios" class="btn btn-sm btn-outline-secondary me-3" title="Voltar">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <h4 class="card-title mb-0">
+                        <i class="fas fa-user-plus me-2 text-primary"></i>Registar Novo Utilizador
+                    </h4>
+                </div>
+            </div>
+
+            <div class="card-body p-4">
+                <form action="/usuarios" method="POST">
+                    <!-- Nome do Utilizador -->
+                    <div class="mb-3">
+                        <label for="nome" class="form-label fw-bold text-muted small text-uppercase">Nome Completo</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0 text-muted">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <input type="text" id="nome" name="nome" class="form-control border-start-0 bg-light" 
+                                   placeholder="Ex: João Silva" value="{{oldData.nome}}" required>
+                        </div>
+                    </div>
+
+                    <!-- E-mail -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-bold text-muted small text-uppercase">Endereço de E-mail</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0 text-muted">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <input type="email" id="email" name="email" class="form-control border-start-0 bg-light" 
+                                   placeholder="joao@empresa.com" value="{{oldData.email}}" required>
+                        </div>
+                    </div>
+
+                    <!-- Senha -->
+                    <div class="mb-3">
+                        <label for="senha" class="form-label fw-bold text-muted small text-uppercase">Palavra-passe</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0 text-muted">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                            <input type="password" id="senha" name="senha" class="form-control border-start-0 bg-light" 
+                                   placeholder="Mínimo 6 caracteres" required>
+                        </div>
+                        <div class="form-text mt-2">
+                            <i class="fas fa-shield-alt me-1"></i> A senha será encriptada automaticamente pelo sistema.
+                        </div>
+                    </div>
+
+                    <!-- Cargo -->
+                    <div class="mb-4">
+                        <label for="cargo" class="form-label fw-bold text-muted small text-uppercase">Nível de Acesso (Cargo)</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0 text-muted">
+                                <i class="fas fa-user-tag"></i>
+                            </span>
+                            <select id="cargo" name="cargo" class="form-select border-start-0 bg-light" required>
+                                <option value="" disabled {{#unless oldData.cargo}}selected{{/unless}}>Selecione uma função...</option>
+                                <option value="cliente" {{#if (eq oldData.cargo 'cliente')}}selected{{/if}}>Cliente (Apenas abre chamados)</option>
+                                <option value="tecnico" {{#if (eq oldData.cargo 'tecnico')}}selected{{/if}}>Técnico (Resolve chamados)</option>
+                                <option value="admin" {{#if (eq oldData.cargo 'admin')}}selected{{/if}}>Administrador (Gestão Total)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Botões de Acção -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="/usuarios" class="btn btn-light border px-4">
+                            Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary px-5 fw-bold">
+                            <i class="fas fa-save me-2"></i>Criar Utilizador
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Informativo de Permissões -->
+        <div class="mt-4 p-3 bg-light rounded-3 border">
+            <h6 class="fw-bold mb-2">
+                <i class="fas fa-info-circle me-2 text-info"></i>Sobre os Cargos
+            </h6>
+            <div class="row small text-muted">
+                <div class="col-sm-4">
+                    <strong>Admin:</strong> Pode gerir utilizadores, setores e todos os chamados.
+                </div>
+                <div class="col-sm-4">
+                    <strong>Técnico:</strong> Visualiza e resolve chamados atribuídos.
+                </div>
+                <div class="col-sm-4">
+                    <strong>Cliente:</strong> Abre e acompanha os seus próprios pedidos.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

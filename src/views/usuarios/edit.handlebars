@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <a href="/usuarios" class="btn btn-sm btn-outline-secondary me-3" title="Voltar">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <h4 class="card-title mb-0 d-flex align-items-center">
+                        <i class="fas fa-user-edit me-2 text-warning"></i>
+                        <span>Editar Utilizador</span>
+                    </h4>
+                </div>
+                <span class="badge bg-light text-muted fw-normal">ID: #{{usuario.id}}</span>
+            </div>
+
+            <div class="card-body p-4">
+                <form action="/usuarios/update/{{usuario.id}}?_method=PUT" method="POST">
+                    
+                    <div class="text-center mb-4">
+                        <div class="position-relative d-inline-block">
+                            <div class="display-4 text-light bg-dark rounded-circle d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; margin: 0 auto;">
+                                <i class="fas fa-user text-white-50"></i>
+                            </div>
+                        </div>
+                        <p class="mt-2 text-dark fw-bold mb-0">{{usuario.nome}}</p>
+                        <small class="text-muted text-uppercase" style="letter-spacing: 1px;">{{usuario.cargo}}</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nome" class="form-label fw-bold small text-muted text-uppercase">Nome Completo</label>
+                        <div class="input-group border rounded shadow-sm">
+                            <span class="input-group-text bg-white border-0"><i class="fas fa-user text-muted"></i></span>
+                            <input type="text" id="nome" name="nome" class="form-control border-0 ps-0" 
+                                   value="{{usuario.nome}}" required placeholder="Insira o nome completo">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-bold small text-muted text-uppercase">Endereço de E-mail</label>
+                        <div class="input-group border rounded shadow-sm">
+                            <span class="input-group-text bg-white border-0"><i class="fas fa-envelope text-muted"></i></span>
+                            <input type="email" id="email" name="email" class="form-control border-0 ps-0" 
+                                   value="{{usuario.email}}" required placeholder="exemplo@dominio.com">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="cargo" class="form-label fw-bold small text-muted text-uppercase">Cargo / Nível de Acesso</label>
+                        <div class="input-group border rounded shadow-sm">
+                            <span class="input-group-text bg-white border-0"><i class="fas fa-briefcase text-muted"></i></span>
+                            <select id="cargo" name="cargo" class="form-select border-0 ps-0" required>
+                                <option value="cliente" {{#if (eq usuario.cargo 'cliente')}}selected{{/if}}>Cliente</option>
+                                <option value="tecnico" {{#if (eq usuario.cargo 'tecnico')}}selected{{/if}}>Técnico</option>
+                                <option value="admin" {{#if (eq usuario.cargo 'admin')}}selected{{/if}}>Administrador</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-light border-start border-warning border-4 d-flex align-items-center shadow-sm" role="alert">
+                        <i class="fas fa-shield-alt text-warning me-3 fa-lg"></i>
+                        <div class="small text-secondary">
+                            <strong>Segurança:</strong> A alteração de senha deve ser solicitada via módulo de recuperação.
+                        </div>
+                    </div>
+
+                    <hr class="my-4 opacity-25">
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="/usuarios" class="btn btn-light border-0 px-4 text-muted">
+                            Descartar
+                        </a>
+                        <button type="submit" class="btn btn-warning px-5 fw-bold shadow-sm text-dark">
+                            <i class="fas fa-save me-2"></i>Guardar Alterações
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

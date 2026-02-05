@@ -1,0 +1,105 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="h3 mb-0"><i class="fas fa-users me-2 text-primary"></i>Gestão de
+    Utilizadores</h2>
+  <a href="/usuarios/novo" class="btn btn-primary shadow-sm">
+    <i class="fas fa-user-plus me-1"></i>
+    Novo Utilizador
+  </a>
+</div>
+
+<div class="card shadow-sm border-0">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light">
+          <tr>
+            <th
+              class="ps-4 border-0 text-uppercase small fw-bold text-muted"
+            >ID</th>
+            <th
+              class="border-0 text-uppercase small fw-bold text-muted"
+            >Nome</th>
+            <th
+              class="border-0 text-uppercase small fw-bold text-muted"
+            >E-mail</th>
+            <th
+              class="border-0 text-uppercase small fw-bold text-muted"
+            >Cargo</th>
+            <th
+              class="text-end pe-4 border-0 text-uppercase small fw-bold text-muted"
+            >Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each usuarios}}
+            <tr>
+              <td class="ps-4 text-muted small">#{{this.id}}</td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div
+                    class="avatar-sm me-2 bg-light rounded-circle d-flex align-items-center justify-content-center"
+                    style="width: 32px; height: 32px;"
+                  >
+                    <i class="fas fa-user text-secondary"></i>
+                  </div>
+                  <span class="fw-semibold">{{this.nome}}</span>
+                </div>
+              </td>
+              <td class="text-secondary">{{this.email}}</td>
+              <td>
+                {{#if (eq this.cargo "admin")}}
+                  <span
+                    class="badge rounded-pill bg-danger-subtle text-danger border border-danger-subtle"
+                  >Administrador</span>
+                {{else if (eq this.cargo "tecnico")}}
+                  <span
+                    class="badge rounded-pill bg-info-subtle text-info border border-info-subtle"
+                  >Técnico</span>
+                {{else}}
+                  <span
+                    class="badge rounded-pill bg-light text-secondary border"
+                  >Cliente</span>
+                {{/if}}
+              </td>
+              <td class="text-end pe-4">
+                <div class="btn-group shadow-sm">
+                  <a
+                    href="/usuarios/editar/{{this.id}}"
+                    class="btn btn-sm btn-white border"
+                    title="Editar"
+                  >
+                    <i class="fas fa-edit text-primary"></i>
+                  </a>
+
+                  <form
+                    action="/usuarios/delete/{{this.id}}?_method=DELETE"
+                    method="POST"
+                    class="d-inline"
+                    onsubmit="return confirm('Tem certeza que deseja eliminar este utilizador?')"
+                  >
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-white border"
+                      title="Eliminar"
+                    >
+                      <i class="fas fa-trash-alt text-danger"></i>
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          {{else}}
+            <tr>
+              <td colspan="5" class="text-center py-5">
+                <div class="text-muted">
+                  <i class="fas fa-users-slash fa-3x mb-3 opacity-25"></i>
+                  <p class="mb-0">Ainda não existem utilizadores registados.</p>
+                </div>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
